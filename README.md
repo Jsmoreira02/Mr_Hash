@@ -4,7 +4,7 @@
     
   <img src="https://img.shields.io/badge/Language%20-Python3-darkgreen.svg" style="max-width: 100%;">
   <img src="https://img.shields.io/badge/Tool%20-Hash Cracking, Decryption-blue.svg" style="max-width: 100%;">
-  <img src="https://img.shields.io/badge/OS%20-Linux, Windows-darkblue.svg" style="max-width: 100%;">
+  <img src="https://img.shields.io/badge/OS%20-Linux-darkblue.svg" style="max-width: 100%;">
   <img src="https://img.shields.io/badge/Hacking and CTF tool%20-teste?style=flat-square" style="max-width: 100%;">  
   <img src="https://img.shields.io/badge/Type%20-Script-red.svg" style="max-width: 100%;">
   <img src="https://img.shields.io/badge/License%20-GPL 3.0-purple.svg" style="max-width: 100%;">
