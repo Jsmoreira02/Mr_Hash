@@ -31,4 +31,21 @@
 
 **Cryptographies**: `{base64, base32, base45, base58, base85}`
 
+***
 
+![ezgif com-video-to-gif](https://github.com/Jsmoreira02/Mr_Hash/assets/103542430/4336d5d1-84ef-496f-8c2e-1a1ec4d3bab6)
+
+***
+## Instalation:
+
+````bash
+git clone https://github.com/Jsmoreira02/Mr_Hash.git
+cd Mr_Hash
+make && make clean
+````
+
+## Requirements:
+
+`````bash
+pip3 install -r requirements.txt
+``````
