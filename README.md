@@ -1,4 +1,4 @@
-![Captura de tela 2023-11-17 164817](https://github.com/Jsmoreira02/Mr_Hash/assets/103542430/f15555da-bc31-4ef1-828d-83615bb82fe6)
+![Captura de tela 2023-11-17 164817](https://github.com/Jsmoreira02/Mr_Hash/assets/103542430/f04e6581-12d5-4ca8-b431-3b6f72966d01)
 
 <div align="center">
     
@@ -13,7 +13,7 @@
 
 
 # Mr. Hash (Hash Cracking and Decryption tool)
-![Captura de tela 2023-11-17 165747](https://github.com/Jsmoreira02/Mr_Hash/assets/103542430/bc1514c6-f83c-4ffb-8a65-0374cc6dc9b7) Simulates a terminal with various utilities for better optimization during hacking activities or CTFs games, and is designed to crack hashes and decrypt ciphers texts (with or without a password).
+![Captura de tela 2023-11-17 165747](https://github.com/Jsmoreira02/Mr_Hash/assets/103542430/1214328b-7f50-4fd1-8879-7e219b3e5b8e) Simulates a terminal with various utilities for better optimization during hacking activities or CTFs games, and is designed to crack hashes and decrypt ciphers texts (with or without a password).
 
 * **Reverse**: Reverse a hash or cipher text
 * **Uppercase**: Convert to uppercase
@@ -33,7 +33,7 @@
 
 ***
 
-![ezgif com-video-to-gif(1)](https://github.com/Jsmoreira02/Mr_Hash/assets/103542430/634a7b1d-f6b4-4ea2-ad67-de59ca392d51)
+![ezgif com-video-to-gif(1)](https://github.com/Jsmoreira02/Mr_Hash/assets/103542430/0567de81-e498-47a3-9d87-264e654bb848)
 
 ***
 ## Instalation:
