@@ -13,7 +13,7 @@
 
 
 # Mr. Hash (Hash Cracking and Decryption tool)
-![Captura de tela 2023-11-17 165747](https://github.com/Jsmoreira02/Mr_Hash/assets/103542430/bc1514c6-f83c-4ffb-8a65-0374cc6dc9b7) Simulates a terminal with various utilities for better optimization during hacking activities or CTF machines, and is designed to crack hashes and decrypt ciphers (with or without a password).
+![Captura de tela 2023-11-17 165747](https://github.com/Jsmoreira02/Mr_Hash/assets/103542430/bc1514c6-f83c-4ffb-8a65-0374cc6dc9b7) Simulates a terminal with various utilities for better optimization during hacking activities or CTFs games, and is designed to crack hashes and decrypt ciphers (with or without a password).
 
 * **Reverse**: Reverse a hash or cipher text
 * **Uppercase**: Convert to uppercase
