@@ -1,7 +1,7 @@
 base45==0.4.4
 base58==2.1.1
 crypto==1.4.1
-cryptography==3.4.8
+cryptography==41.0.6
 pycryptodome==3.19.0
 pyinstaller==6.2.0
 pyinstaller-hooks-contrib==2023.10
