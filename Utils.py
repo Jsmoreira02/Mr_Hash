@@ -1,9 +1,78 @@
 from hashlib import md5, sha1, sha224, sha256, sha512, sha384, sha512
-from Session import Var_results
 from base64 import b64decode, b32decode, b85decode
+from Crypto.Hash import MD2, MD4
+from Session import Var_results
 from base45 import b45decode
 from base58 import b58decode
-from Crypto.Hash import MD2, MD4
+from re import search, sub
+
+
+class Identifier:
+
+    def identify_value(string):
+
+        red_bold = "\x1b[1;31m"
+        reset = "\x1b[0m"
+
+        hashlen = len(string)
+
+        if hashlen == 32 and all(chr in "0123456789abcdef" for chr in string):
+            return "Try these options => {MD5/MD4/MD2}"
+        elif hashlen == 40 and string.isalnum():
+            return "SHA-1"
+        elif hashlen == 56 and all(chr in "0123456789abcdef" for chr in string):
+            return "SHA-224"
+        elif hashlen == 64 and all(chr in "0123456789abcdef" for chr in string):
+            return "SHA-256"
+        elif hashlen == 96 and all(chr in "0123456789abcdef" for chr in string):
+            return "SHA-384"
+        elif hashlen == 128 and all(chr in "0123456789abcdef" for chr in string):
+            return "SHA-512"
+        else:
+            def is_base64(string):
+                try:
+                    b64decode(string)
+                    return True
+                except Exception:
+                    return False
+
+            def is_base32(string):
+                base32_chars = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ234567")
+                return all(chr in base32_chars for chr in string)
+
+            def is_base58(string):
+                base58_chars = set("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz")
+                return all(chr in base58_chars for chr in string)
+
+            def is_base85(string):
+                base85_chars = set("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!#$%&()*+-;<=>?@^_`{|}~")
+                return all(chr in base85_chars for chr in string)
+
+            def is_base45(string):
+                valid_chars = set("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:")
+                return all(chr in valid_chars for chr in string)
+            
+            def is_vigenere(string):
+                string = sub(r'[^a-zA-Z0-9]', '', string)
+
+                return search(r'[^a-zA-Z]', string) is None
+
+            if is_base64(string):
+                return "Base64"
+            elif is_base32(string):
+                return "Base32"
+            elif is_base58(string):
+                return "Base58"
+            elif is_base85(string):
+                return "Base85"
+            elif is_base45(string):
+                return "Base45"
+            elif is_vigenere(string):
+                return "Vigenère"
+            else:
+                pass
+
+        return f"[{red_bold}X{reset}] The algorithm could not be identified\n"
 
 
 class Ciphers_Cryptographies:

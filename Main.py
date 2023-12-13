@@ -1,4 +1,4 @@
-from Utils import Hash, Ciphers_Cryptographies
+from Utils import Hash, Ciphers_Cryptographies, Identifier
 from Session import List, Var_results
 from os import system, getcwd
 from shlex import split
@@ -29,7 +29,7 @@ def logo():
 
 
     description = f"\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-    description += f"\n| {red}Hashes{reset}: {{MD2, MD4, MD5, SHA1, SHA224, SHA256, SHA512, SHA384, SHA512}}\n"
+    description += f"\n| {red}Hashes{reset}: {{MD2, MD4, MD5, SHA1, SHA224, SHA256, SHA512, SHA384}}\n"
     description += f"| {red}Cryptographies{reset}: {{base64, base32, base45, base58, base85}}\n"
     description += f"| {red}Ciphers{reset}: {{ROT13, ROT47, octal, vigenere}}\n"
     description += "|\n"
@@ -42,7 +42,6 @@ def logo():
 class Console(Cmd):
 
     session = Var_results()
-
 
     def __init__(self):
 
@@ -61,23 +60,36 @@ class Console(Cmd):
             info += "---------------------\n"
             info += "|  - crack          |\n"
             info += "|  - decrypt        |\n"
+            info += "| ----------------- |\n"
+            info += "|    - Utils -      |\n"
+            info += "| ----------------- |\n"
             info += "|  - reverse        |\n"
             info += "|  - variable       |\n"
             info += "|  - uppercase      |\n"
-            info += "|  - lowercase      |\n" 
+            info += "|  - lowercase      |\n"
+            info += "|  - savetofile     |\n"
+            info += "|  - identify       |\n" 
             info += "|  - list           |\n"
+            info += "| ----------------- |\n"
+            info += "|    - Console -    |\n"
+            info += "| ----------------- |\n"
+            info += "|  - pwd            |\n"
+            info += "|  - cat            |\n"
+            info += "|  - ls             |\n"
             info += "|  - clear          |\n"
             info += "|  - exit           |\n"
             info += "---------------------\n\n"
 
-            info += "- crack [hash or variable_name] [wordlist file path] [type]\n"
-            info += "- decrypt [encrypted text or Ciphertext] [key] [type]\n"
-            info += "- reverse [hash or encrypted text/variable_name]\n"
-            info += "- variable [file path/hash_text} [name]\n"
-            info += "- uppercase [hash or encrypted text/variable_name]\n"
-            info += "- lowercase [hash or encrypted text/variable_name]\n"
-            info += "- list [options: hashes, crypt, results, variables]\n"
-            info += "- clear\n"
+            info += "- crack [hash or variable_name] [wordlist file path] [type]\n\n"
+            info += "- decrypt [encrypted text or Ciphertext] [key] [type]\n\n"
+            info += "- reverse [hash or encrypted text/variable_name]\n\n"
+            info += "- variable [file path/hash_text} [name]\n\n"
+            info += "- uppercase [hash or encrypted text/variable_name]\n\n"
+            info += "- lowercase [hash or encrypted text/variable_name]\n\n"
+            info += "- savetofile [filename]\n\n"
+            info += "- identify [hash or encrypted text/variable_name]\n\n"
+            info += "- list [options: hashes, crypt, results, variables]\n\n"
+            info += "- clear\n\n"
             info += "- exit\n\n"
 
             info += "Type: help [options] for more info\n"
@@ -169,6 +181,28 @@ class Console(Cmd):
             info += "|--------------------------------------------------------------------------------|\n"
 
             print(info)
+        
+        elif args[0] == "identify":
+            system("clear")
+
+            info = "\n|--------------------------------------------------------------------------------|\n"
+            info += "| Analyzes and identifies the type of hash, cipher or encryption                 |\n"
+            info += "| Example: identify f961d3063fb669c263449563c8e2852b0228f68e                     |\n"
+            info += "| You can also pass a variable as data, to shorten the size of the command input |\n"
+            info += "| Example: identify hash                                                         |\n"
+            info += "|--------------------------------------------------------------------------------|\n"
+
+            print(info)
+        
+        elif args[0] == "savetofile":
+            system("clear")
+
+            info = "\n|--------------------------------------------------|\n"
+            info += "| Save every cracked ou decrypted value to a file  |\n"
+            info += "| Example: savetofile results.txt                  |\n"
+            info += "|--------------------------------------------------|\n"
+
+            print(info)                  
 
         elif args[0] == "quit" or args[0] == "exit":
             system("clear")
@@ -311,13 +345,51 @@ class Console(Cmd):
             print("-> Command syntax not recognized, try again or type [help {options}] for more information\n")
 
 
+    def do_savetofile(self, args):
+
+        args = split(args)
+
+        if len(args) == 1:
+            filename = args[0]
+            with open(filename, "w") as file:
+
+                result = f"\n| -------------------------- [{green_bold}!Your Results!{reset}] -------------------------- |\n"
+                for key, value in self.session.results_list.items():
+                    result += f"| --> {key}: {value}"
+
+                result += f"| -------------------------- [{green_bold}!Your Results!{reset}] -------------------------- |\n\n"
+
+                file.write(result)
+                file.close()
+        else:
+            print("-> Command syntax not recognized, try again or type [help {options}] for more information\n")
+
+        
+    def do_identify(self, args):
+
+        args = split(args)
+
+        if len(args) == 1:
+            
+            unknown = args[0]
+            if unknown in self.session.variables.keys():
+                unknown = self.session.variables.get(unknown)
+            else:
+                pass
+
+            type = Identifier.identify_value(unknown)
+            print(f"[{green_bold}+{reset}] Type: {type}")
+        else:
+            print("-> Command syntax not recognized, try again or type [help {options}] for more information\n")
+
+
     def do_list(self, args):
 
         args = split(args)
 
         if len(args) == 1:
-            status = args[0]
-            run = List(status)
+            options = args[0]
+            run = List(options)
 
             print(run.list())
         else:
@@ -353,6 +425,27 @@ class Console(Cmd):
             
             except Exception as e:
                 return f"[{red}X{reset}] {e}"
+            
+    
+    def do_cat(self, args):
+
+        args = args.split()
+
+        if not args:
+            print("-> Command syntax not recognized. File path not found!\n")
+        else:
+            suffix = args[0]
+
+            if suffix in self.session.variables.keys():
+                suffix = self.session.variables.get(suffix)
+            else:
+                pass
+            
+            try:
+                system("cat " + suffix)
+
+            except Exception as e:
+                return f"[{red}X{reset}] {e}"
     
     
     def do_clear(self, args):
@@ -373,6 +466,7 @@ class Console(Cmd):
     
     
 if __name__ == "__main__":
+    
     console = Console()
 
     try:
@@ -382,4 +476,3 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("\nCtrl+C detected! Finished!")
         exit()
-        
