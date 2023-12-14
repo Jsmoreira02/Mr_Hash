@@ -49,8 +49,8 @@ class Identifier:
                 return all(chr in base85_chars for chr in string)
 
             def is_base45(string):
-                valid_chars = set("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:")
-                return all(chr in valid_chars for chr in string)
+                base45_chars = set("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:")
+                return all(chr in base45_chars for chr in string)
             
             def is_vigenere(string):
                 string = sub(r'[^a-zA-Z0-9]', '', string)
