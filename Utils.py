@@ -4,6 +4,7 @@ from Crypto.Hash import MD2, MD4
 from Session import Var_results
 from base45 import b45decode
 from base58 import b58decode
+from binascii import Error
 from re import search, sub
 
 
@@ -30,32 +31,71 @@ class Identifier:
             return "SHA-512"
         else:
             def is_base64(string):
+                if len(string) % 4 != 0:
+                    return False
+                
+                for check in string.split():
+                    if check.isnumeric():
+                        return False
+
+                valid_chars = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=")
+                if not all(char in valid_chars for char in string):
+                    return False
+                
                 try:
                     b64decode(string)
-                    return True
-                except Exception:
+                except (TypeError, Error):
                     return False
 
+                return True
+
             def is_base32(string):
-                base32_chars = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ234567")
-                return all(chr in base32_chars for chr in string)
+                for check in string.split():
+                    if check.isnumeric():
+                        return False
+                else:
+                    base32_chars = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ234567")
+                    return all(chr in base32_chars for chr in string)
 
             def is_base58(string):
-                base58_chars = set("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz")
-                return all(chr in base58_chars for chr in string)
+                for check in string.split():
+                    if check.isnumeric():
+                        return False
+                else:
+                    base58_chars = set("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz")
+                    return all(chr in base58_chars for chr in string)
 
             def is_base85(string):
-                base85_chars = set("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!#$%&()*+-;<=>?@^_`{|}~")
-                return all(chr in base85_chars for chr in string)
+                for check in string.split():
+                    if check.isnumeric():
+                        return False
+                else:
+                    base85_chars = set("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!#$%&()*+-;<=>?@^_`{|}~")
+                    return all(chr in base85_chars for chr in string)
 
             def is_base45(string):
-                base45_chars = set("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:")
-                return all(chr in base45_chars for chr in string)
+                for check in string.split():
+                    if check.isnumeric():
+                        return False
+                else:
+                    base45_chars = set("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:")
+                    return all(chr in base45_chars for chr in string)
             
             def is_vigenere(string):
                 string = sub(r'[^a-zA-Z0-9]', '', string)
 
                 return search(r'[^a-zA-Z]', string) is None
+            
+            def is_octal(string):
+                octal_values = string.split()
+
+                try:
+                    for value in octal_values:
+                        int_value = int(value, 8)
+                except ValueError:
+                    return False
+
+                return True
 
             if is_base64(string):
                 return "Base64"
@@ -68,7 +108,9 @@ class Identifier:
             elif is_base45(string):
                 return "Base45"
             elif is_vigenere(string):
-                return "Vigenère"
+                return "Try these options => {Vigenère/ROT13/ROT47}"
+            elif is_octal(string):
+                return "Octal"
             else:
                 pass
 
