@@ -20,12 +20,14 @@
 * **Lowercase**: Convert to lowercase
 * **Variable**: Stores hashes and long ciphertext (and much more) in a key for easier reference and use during program execution
 * **Results**: All cracked hashes and ciphers decrypted during program execution are saved..
+* **Savetofile**: Save every cracked ou decrypted value to a file
+* **Identify**: Analyzes, identifies and returns the type of hash, encryption or ciphertext. It's designed to be as effective as possible, but it's not 100%.
 
 ### New functions will be constantly added to the project. ###
 
 ## Hashes | Ciphers ##
 
-**Hashes**: `{MD2, MD4, MD5, SHA1, SHA224, SHA256, SHA512, SHA384, SHA512}`
+**Hashes**: `{MD2, MD4, MD5, SHA1, SHA224, SHA256, SHA512, SHA384}`
 
 **Ciphers**: `{ROT13, ROT47, octal, vigenere}`
 
