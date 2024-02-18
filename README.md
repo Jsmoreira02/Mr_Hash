@@ -1,4 +1,4 @@
-![Captura de tela 2023-11-17 164817](https://github.com/Jsmoreira02/Mr_Hash/assets/103542430/f04e6581-12d5-4ca8-b431-3b6f72966d01)
+<img align="center" src="https://github.com/Jsmoreira02/Mr_Hash/assets/103542430/b23e7ab8-58e5-4772-873f-e93ddf4d2bbe">
 
 <div align="center">
     
