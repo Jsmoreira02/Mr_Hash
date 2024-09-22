@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+
+# Coded by: Jsmoreira02
+# https://github.com/Jsmoreira02
+
 from Utils import Hash, Ciphers_Cryptographies, Identifier
 from Session import List, Var_results
 from os import system, getcwd
